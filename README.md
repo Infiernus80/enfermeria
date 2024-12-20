@@ -5,95 +5,180 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Proyecto de Enfermería
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este proyecto está diseñado para gestionar datos relacionados con pacientes, medicamentos, citas médicas, horarios de administración de medicamentos y tanques de oxígeno en un entorno médico. Utiliza **NestJS** como framework para el backend.
 
-## Project setup
+## Características Principales
 
-```bash
-$ npm install
+- **Gestión de Usuarios:**
+
+  - Crear y listar usuarios con roles de `Admin` o `Familiar`.
+
+- **Módulo de Pacientes:**
+
+  - Registro y seguimiento de pacientes.
+
+- **Medicamentos:**
+
+  - Asignación y consulta de medicamentos por paciente.
+  - Horarios de administración de medicamentos.
+
+- **Citas Médicas:**
+
+  - Registro y consulta de citas médicas con notas asociadas.
+
+- **Tanques de Oxígeno:**
+  - Gestión de tanques con cálculo automático de duración.
+  - Registro de cambios y asociación con pacientes.
+
+## Requisitos Previos
+
+- Node.js v18+
+- PostgreSQL
+- npm o yarn
+
+## Instalación
+
+1. Clonar el repositorio:
+
+   ```bash
+   git clone https://github.com/Infiernus80/enfermeria.git
+   cd proyecto-enfermeria
+   ```
+
+2. Instalar dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Configurar las variables de entorno:
+
+   Crear un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+
+   ```env
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_USER=tu_usuario
+   DB_PASSWORD=tu_contraseña
+   DB_NAME=nombre_base_datos
+   JWT_SECRET=tu_secreto
+   ```
+
+<!-- 4. Ejecutar las migraciones de la base de datos:
+
+   ```bash
+   npm run typeorm -- migration:run
+   ``` -->
+
+## Scripts Disponibles
+
+- **Iniciar el servidor:**
+
+  ```bash
+  npm run start
+  ```
+
+- **Iniciar en modo desarrollo:**
+
+  ```bash
+  npm run start:dev
+  ```
+
+<!-- - **Ejecutar pruebas:**
+
+  ```bash
+  npm run test
+  ``` -->
+
+<!-- - **Generar una migración:**
+
+  ```bash
+  npm run typeorm -- migration:generate src/migrations/<nombre_migracion>
+  ``` -->
+
+## Endpoints Principales
+
+### Usuarios
+
+- **GET /usuarios**: Obtiene todos los usuarios.
+- **POST /usuarios**: Crea un nuevo usuario.
+
+### Pacientes
+
+- **GET /pacientes**: Obtiene todos los pacientes.
+- **POST /pacientes**: Crea un nuevo paciente.
+
+### Medicamentos
+
+- **GET /medicamentos/paciente/:id**: Obtiene los medicamentos de un paciente.
+- **POST /medicamentos/paciente**: Asigna un medicamento a un paciente.
+
+### Citas Médicas
+
+- **GET /citas-medicas/:id**: Obtiene una cita médica por ID.
+- **POST /citas-medicas**: Crea una nueva cita médica.
+
+### Tanques de Oxígeno
+
+- **GET /tanques-oxigeno/:id**: Obtiene información de un tanque de oxígeno.
+- **POST /tanques-oxigeno**: Registra un nuevo tanque de oxígeno.
+
+## Documentación de API
+
+Este proyecto utiliza **Swagger** para documentar su API. Una vez que el servidor esté en ejecución, accede a:
+
+```
+http://localhost:3000/api
 ```
 
-## Compile and run the project
+## Estructura del Proyecto
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```
+proyecto-enfermeria/
+├── src/
+│   ├── usuarios/
+│   ├── pacientes/
+│   ├── medicamentos/
+│   ├── citas-medicas/
+│   ├── tanques-oxigeno/
+│   └── common/
+├── test/
+├── .env
+├── nest-cli.json
+├── package.json
+├── README.md
+└── tsconfig.json
 ```
 
-## Run tests
+## Contribuciones
 
-```bash
-# unit tests
-$ npm run test
+1. Hacer un fork del repositorio.
+2. Crear una rama para tu funcionalidad o corrección:
 
-# e2e tests
-$ npm run test:e2e
+   ```bash
+   git checkout -b mi-nueva-funcionalidad
+   ```
 
-# test coverage
-$ npm run test:cov
-```
+3. Hacer un commit de tus cambios:
 
-## Deployment
+   ```bash
+   git commit -m "Agrega una nueva funcionalidad"
+   ```
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+4. Hacer push a tu rama:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+   ```bash
+   git push origin mi-nueva-funcionalidad
+   ```
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+5. Crear un Pull Request.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## Licencia
 
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
